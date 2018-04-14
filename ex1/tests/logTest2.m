@@ -9,6 +9,6 @@ function logTest2(a, x)
     else
 %         fprintf("OK log_%f(%f):\n\tmine:   %.8f, \n\ttheirs: %.8f\n", a,x,mine,theirs)
     end
-    fprintf("\nlog_%f(%f): \n", a,x);
-    fprintf("mine_y = %.8f \ntrue_y = %.8f \nerr = %.8f\n\n", mine, theirs, log10(abs(mine-theirs)/theirs));
+%     fprintf("\nlog_%f(%f): \n", a,x);
+%     fprintf("mine_y = %.8f \ntrue_y = %.8f \nerr = %.8f\n\n", mine, theirs, log10(abs(mine-theirs)/theirs));
 end

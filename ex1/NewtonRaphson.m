@@ -12,6 +12,7 @@ function [zero, Niters]= NewtonRaphson(func, functag, tol, a, b)
     fx = func(x);
     Niters = 0;
     size_of_correction = Inf;
+    tol = tol/10; % some spare accuracy :-)
     
     % iterations:
     while (fx ~=0 && size_of_correction > tol)
@@ -36,7 +37,6 @@ function [zero, Niters]= NewtonRaphson(func, functag, tol, a, b)
         else
             right = x;
         end     
-%         fprintf("%f\n", fx);
     end
     zero = x;
 end

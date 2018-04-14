@@ -1,4 +1,4 @@
-function PlotNitersPerTolerance(f, ftag, left, right)
+function PlotNitersPerTolerance(f, ftag, left, right, legend_text)
     error_tols = arrayfun(@(x) 10^(-x), 2:9);
     num_iterations = zeros(size(error_tols));
     

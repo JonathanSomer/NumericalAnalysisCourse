@@ -21,7 +21,7 @@ function [y] = myLog(a,x)
     ra = logUpperBound(a);
     
     
-    while (isInInterval(0, la, ra)) || FractionValueRange(lx,rx,la,ra) > tol
+    while (isInInterval(0, la, ra) || FractionValueRange(lx,rx,la,ra) > tol)
         [lx, rx] = binaryStep(lx, rx, x);
         [la, ra] = binaryStep(la, ra, a);
     end
