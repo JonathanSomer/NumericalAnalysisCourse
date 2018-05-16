@@ -10,4 +10,8 @@ function [x_0, y_0, x_1, y_1] = ClosestPoints(X, Y, x)
           return;
        end
     end
+    x_0 = X(length(X));
+    y_0 = Y(length(X));
+    x_1 = X(length(X));
+    y_1 = Y(length(X));
 end

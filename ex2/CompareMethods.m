@@ -27,12 +27,15 @@ function [] = CompareMethods(f, ftag)
        
        [yy] = HermiteInterp(x, y, ytag, xx);
        hermiteMaxError = [hermiteMaxError, max(abs(yy - true_y))];
+        
+        subplot(4,4,n)
+       plot(xx, yy, xx, true_y);
+       title("function: " + char(f) + "N = 2^" + n)
        
-       [yy] = myLS(x, y, xx, 50);
+
+        [yy] = myLS(x, y, xx, 50);
        lsMaxError = [lsMaxError, max(abs(yy - true_y))];
-%        subplot(4,4,n)
-%        plot(xx, yy, xx, true_y);
-%        title("function: " + char(f) + "N = 2^" + n)       
+       
 
     end
 
