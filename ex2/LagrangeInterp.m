@@ -6,9 +6,23 @@ function [yy]=LagrangeInterp(x, y, xx)
        return; 
     end
     
+    n = length(x);
+    denomenator = zeros(1, length(x));
+    for i = 1:n
+       x_without_i = x([1:i-1, i+1:end]);
+       denomenator(i) = prod(x(i) - x_without_i);
+    end
+    
     yy = zeros(1, length(xx));
     for i = 1:length(yy)
-       l_x = EvaluateLagrangeBasisPolynomials(x, xx(i));
+       interpolated_x = xx(i);
+       
+       prod_elements = interpolated_x - x;
+       numerator_prod = prod(prod_elements);
+       numerator = rdivide(numerator_prod, prod_elements);
+       
+       l_x = rdivide(numerator, denomenator);
+        
        yy(i) =  dot(y,l_x);
     end
 end

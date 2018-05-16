@@ -1,6 +1,6 @@
 % the methods: myLS, HermiteInterp, LagrangeInterp, PWLinear
-% without noise
-function [] = CompareMethods(f, ftag)    
+% with noise
+function [] = CompareMethodsNoisy(f, ftag)    
     lsMaxError = [];
     hermiteMaxError = [];
     lagrangeMaxError = [];
@@ -12,8 +12,8 @@ function [] = CompareMethods(f, ftag)
        Ns = [Ns, 2^n];
        
        x = linspace(-1, 1, 2^n);
-       y = arrayfun(@(var) f(var), x);
-       ytag = arrayfun(@(var) ftag(var), x);
+       y = arrayfun(@(var) f(var) + 0.01*rand(), x);
+       ytag = arrayfun(@(var) ftag(var) + 0.01*rand(), x);
        
        xx = linspace(min(x), max(x),1e4);
        true_y = arrayfun(@(var) f(var), xx);
@@ -21,9 +21,6 @@ function [] = CompareMethods(f, ftag)
        [yy] = LagrangeInterp(x, y, xx);
        lagrangeMaxError = [lagrangeMaxError, max(abs(yy - true_y))];    
        
-                     subplot(4,4,n)
-       plot(xx, yy, xx, true_y);
-       title("function: " + char(f) + "N = 2^" + n)
        
        [yy] = PWLinear(x, y, xx);
        pwMaxError = [pwMaxError, max(abs(yy - true_y))];
@@ -34,7 +31,11 @@ function [] = CompareMethods(f, ftag)
 
        [yy] = myLS(x, y, xx, 25);
        lsMaxError = [lsMaxError, max(abs(yy - true_y))];
-               
+       
+       subplot(4,4,n)
+       plot(xx, yy, xx, true_y);
+       title("function: " + char(f) + "N = 2^" + n)
+%        
 
     end
     
