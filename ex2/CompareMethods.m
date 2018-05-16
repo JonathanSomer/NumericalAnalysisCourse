@@ -7,7 +7,7 @@ function [] = CompareMethods(f, ftag)
     pwMaxError = [];
     Ns = [];
     
-%     figure
+    fig = figure;
     for n = 1:8
        Ns = [Ns, 2^n];
        
@@ -21,22 +21,26 @@ function [] = CompareMethods(f, ftag)
        [yy] = LagrangeInterp(x, y, xx);
        lagrangeMaxError = [lagrangeMaxError, max(abs(yy - true_y))];    
        
-                     subplot(4,4,n)
-       plot(xx, yy, xx, true_y);
-       title("function: " + char(f) + "N = 2^" + n)
-       
        [yy] = PWLinear(x, y, xx);
        pwMaxError = [pwMaxError, max(abs(yy - true_y))];
        
+       
        [yy] = HermiteInterp(x, y, ytag, xx);
        hermiteMaxError = [hermiteMaxError, max(abs(yy - true_y))];
-        
+       
+
 
        [yy] = myLS(x, y, xx, 25);
        lsMaxError = [lsMaxError, max(abs(yy - true_y))];
-               
+
+       subplot(4,4,n)
+       plot(xx, yy, xx, true_y);
+       title("function: " + char(f) + "N = 2^" + n)
 
     end
+    
+    saveas(fig, "least_squares_example.jpg")
+    
     
     figure
     loglog(Ns, lsMaxError, Ns, hermiteMaxError, Ns, pwMaxError, Ns, lagrangeMaxError);
